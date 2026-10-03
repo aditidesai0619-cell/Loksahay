@@ -1,0 +1,108 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Card/control radius — bumped from Tailwind's 4px default so every
+     existing `rounded-sm` surface (cards, buttons, tables, drawers, badges)
+     reads as a deliberate operational panel rather than a bare admin grid. */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+
+  /* Core palette */
+  --color-background: #f5f3ee;
+  --color-surface: #ffffff;
+  --color-surface-sunken: #efede6;
+  --color-primary: #254d3a;
+  --color-primary-dark: #15301f;
+  --color-primary-light: #3a6b50;
+  --color-secondary: #66745f;
+  --color-accent: #c86b3c;
+  --color-accent-dark: #a9552c;
+  --color-warning: #d69a2d;
+  --color-critical: #b84235;
+  --color-text: #20231f;
+  --color-muted: #72766f;
+  --color-border: #dddcd5;
+
+  /* Tint backgrounds for badges / panels */
+  --color-primary-tint: #e4ebe5;
+  --color-accent-tint: #f6e6da;
+  --color-warning-tint: #f8ecd4;
+  --color-critical-tint: #f5dfdb;
+  --color-secondary-tint: #eaece7;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-primary-tint);
+    color: var(--color-primary-dark);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-border);
+    border-radius: 4px;
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Subtle operational-panel shadow — used on cards/tables instead of the
+     default borderless flat surface, kept faint so it reads as depth, not
+     glassmorphism or a generic SaaS widget shadow. */
+  .shadow-card {
+    box-shadow: 0 1px 2px rgba(32, 35, 31, 0.04), 0 2px 6px rgba(32, 35, 31, 0.05);
+  }
+}
+
+/* Leaflet marker overrides to fit operational palette */
+.leaflet-container {
+  font-family: var(--font-sans);
+  background: #e9e6dc;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 16px rgba(32, 35, 31, 0.12);
+}
+
+.leaflet-popup-content {
+  margin: 0;
+  min-width: 220px;
+}
+
+.leaflet-control-zoom a {
+  color: var(--color-primary) !important;
+}
+
+.ls-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
